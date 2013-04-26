@@ -42,11 +42,11 @@ public class MakeEuler{
     
     public static String main(){
         String main = "";
-        main +="\tpublic static void main(String[] args){\n";
-        main +="\t\tlong start = System.currentTimeMillis();\n";
-        main +="\t\tlong end = System.currentTimeMillis();\n";
-        main +="\t\tprintTime(end-start);\n";
-        main +="\t}\n";
+        main +="    public static void main(String[] args){\n";
+        main +="        long start = System.currentTimeMillis();\n";
+        main +="        long end = System.currentTimeMillis();\n";
+        main +="        printTime(end-start);\n";
+        main +="    }\n";
         return main;
     }
     
@@ -127,134 +127,134 @@ public class MakeEuler{
     
     public static String makeParseMethod(){
         String method = "";
-        method +="\tpublic static boolean isIntParseable(String s){\n";
-        method +="\t\ttry{\n";
-        method +="\t\t\tInteger.parseInt(s);\n";
-        method +="\t\t\treturn true;\n";
-        method +="\t\t} catch(Exception e){\n";
-        method +="\t\t\rreturn false;\n";
-        method +="\t\t}\n";
-        method +="\t}\n";
+        method +="    public static boolean isIntParseable(String s){\n";
+        method +="        try{\n";
+        method +="            Integer.parseInt(s);\n";
+        method +="            return true;\n";
+        method +="        } catch(Exception e){\n";
+        method +="        \rreturn false;\n";
+        method +="        }\n";
+        method +="    }\n";
         return method;
     }
     
     public static String makePrimeMethod(){
         String method = "";
-        method +="\tpublic static boolean isPrime(int x){\n";
-        method +="\t\tfor(int i=2; i<=Math.sqrt(x); i++)\n";
-        method +="\t\t\tif(x%i==0)\n";
-        method +="\t\t\t\treturn false;\n";
-        method +="\t\treturn true;\n";
-        method +="\t}\n";
+        method +="    public static boolean isPrime(int x){\n";
+        method +="        for(int i=2; i<=Math.sqrt(x); i++)\n";
+        method +="            if(x%i==0)\n";
+        method +="                return false;\n";
+        method +="        return true;\n";
+        method +="    }\n";
         return method;
     }
     
     public static String makePalMethod(){
         String method = "";
-        method +="\tpublic static boolean isPal(String s){\n";
-        method +="\t\tString t = \"\";\n";
-        method +="\t\tfor(int i=s.length()-1; i>=0; i--)\n";
-        method +="\t\t\tt += s.charAt(i);\n";
-        method +="\t\treturn s.equals(t);\n";
-        method +="\t}\n";
+        method +="    public static boolean isPal(String s){\n";
+        method +="        String t = \"\";\n";
+        method +="        for(int i=s.length()-1; i>=0; i--)\n";
+        method +="            t += s.charAt(i);\n";
+        method +="        return s.equals(t);\n";
+        method +="    }\n";
         return method;
     }
     
     public static String makeFibMethod(){
         String method = "";
-        method +="\tpublic static boolean isFib(int x){\n";
-        method +="\t\tArrayList<Integer>fibList = new ArrayList<Integer>();\n";
-        method +="\t\tint i = 1;\n";
-        method +="\t\tint j = 1;\n";
-        method +="\t\tfibList.add(i);\n";
-        method +="\t\tfibList.add(j);\n";
-        method +="\t\tint sum = 0;\n";
-        method +="\t\twhile(sum<x){\n";
-        method +="\t\t\tsum = i+j;\n";
-        method +="\t\t\tfibList.add(sum);\n";
-        method +="\t\t\ti=j;\n";
-        method +="\t\t\tj=sum;\n";
-        method +="\t\t}\n";
-        method +="\t\treturn fibList.contains(x);\n";
-        method +="\t}\n";
+        method +="    public static boolean isFib(int x){\n";
+        method +="        ArrayList<Integer>fibList = new ArrayList<Integer>();\n";
+        method +="        int i = 1;\n";
+        method +="        int j = 1;\n";
+        method +="        fibList.add(i);\n";
+        method +="        fibList.add(j);\n";
+        method +="        int sum = 0;\n";
+        method +="        while(sum<x){\n";
+        method +="            sum = i+j;\n";
+        method +="            fibList.add(sum);\n";
+        method +="            i=j;\n";
+        method +="            j=sum;\n";
+        method +="        }\n";
+        method +="        return fibList.contains(x);\n";
+        method +="    }\n";
         return method;
     }
     
     public static String makePanMethod(){
         String method = "";
-        method +="\tpublic static boolean isPan(int x, int scale){\n";
-        method +="\t\t//to add 0, change the array size by +1 and remove -1 from marked lines\n";
-        method +="\t\tString s = \"\" + x;\n";
-        method +="\t\tif(s.length()!=scale)\n";
-        method +="\t\t\treturn false;\n";
-        method +="\t\tboolean [] digits = new boolean[scale];\n";
-        method +="\t\tfor(int i=0; i<s.length(); i++){\n";
-        method +="\t\t\tint y = Integer.parseInt(\"\" + s.charAt(i));\n";
-        method +="\t\t\tif(y>scale || y==0) //Also remove the RHS\n";
-        method +="\t\t\t\treturn false;\n";
-        method +="\t\t\tif(digits[y-1]==true) //HERE\n";
-        method +="\t\t\t\treturn false;\n";
-        method +="\t\t\tdigits[y-1] = true; //HERE\n";
-        method +="\t\t}\n";
-        method +="\t\treturn true;\n";
-        method +="\t}\n";
+        method +="    public static boolean isPan(int x, int scale){\n";
+        method +="        //to add 0, change the array size by +1 and remove -1 from marked lines\n";
+        method +="        String s = \"\" + x;\n";
+        method +="        if(s.length()!=scale)\n";
+        method +="            return false;\n";
+        method +="        boolean [] digits = new boolean[scale];\n";
+        method +="        for(int i=0; i<s.length(); i++){\n";
+        method +="            int y = Integer.parseInt(\"\" + s.charAt(i));\n";
+        method +="            if(y>scale || y==0) //Also remove the RHS\n";
+        method +="                return false;\n";
+        method +="            if(digits[y-1]==true) //HERE\n";
+        method +="                return false;\n";
+        method +="            digits[y-1] = true; //HERE\n";
+        method +="        }\n";
+        method +="        return true;\n";
+        method +="    }\n";
         return method;
     }
     
     public static String makeFracMethod(){
         String method = "";
-        method +="\tpublic static String getReducedFrac(int num, int den){\n";
-        method +="\t\tmainLoop:\n";
-        method +="\t\twhile(true){\n";
-        method +="\t\t\tfor(int i=2; i<=num; i++){\n";
-        method +="\t\t\t\tif(num%i==0 && den%i==0){\n";
-        method +="\t\t\t\t\tnum /= i;\n";
-        method +="\t\t\t\t\tden /= i;\n";
-        method +="\t\t\t\t\tcontinue mainLoop;\n";
-        method +="\t\t\t\t}\n";
-        method +="\t\t\t}\n";
-        method +="\t\t\tbreak;\n";
-        method +="\t\t}\n";
-        method +="\t\treturn num + \"/\" + den;\n";
-        method +="\t}\n";
+        method +="    public static String getReducedFrac(int num, int den){\n";
+        method +="        mainLoop:\n";
+        method +="        while(true){\n";
+        method +="            for(int i=2; i<=num; i++){\n";
+        method +="                if(num%i==0 && den%i==0){\n";
+        method +="                    num /= i;\n";
+        method +="                    den /= i;\n";
+        method +="                    continue mainLoop;\n";
+        method +="                }\n";
+        method +="            }\n";
+        method +="            break;\n";
+        method +="        }\n";
+        method +="        return num + \"/\" + den;\n";
+        method +="    }\n";
         return method;
     }
     
     public static String makeFactMethod(){
         String method = "";
-        method +="\tpublic static long getFactorial(long l){\n";
-        method +="\t\tlong x = 1;\n";
-        method +="\t\tfor(long i=1; i<=l; i++)\n";
-        method +="\t\t\tx *= i;\n";
-        method +="\t\treturn x;\n";
-        method +="\t}\n";
+        method +="    public static long getFactorial(long l){\n";
+        method +="        long x = 1;\n";
+        method +="        for(long i=1; i<=l; i++)\n";
+        method +="            x *= i;\n";
+        method +="        return x;\n";
+        method +="    }\n";
         return method;
     }
     
     public static String closure(){
         String closure = "\n";
-        closure +="\tpublic static void printTime(long ms){\n";
-        closure +="\t\tlong s=0, m=0, h=0;\n";
-        closure +="\t\tif(ms>1000){\n";
-        closure +="\t\t\ts = ms/1000;\n";
-        closure +="\t\t\tif(s>60){\n";
-        closure +="\t\t\t\tm = s/60;\n";
-        closure +="\t\t\t\tif(m>60)\n";
-        closure +="\t\t\t\t\th = m/60;\n";
-        closure +="\t\t\t}\n";
-        closure +="\t\t}\n";
-        closure +="\t\tm%=60;\n";
-        closure +="\t\ts%=60;\n";
-        closure +="\t\tms%=1000;\n";
-        closure +="\t\tString a=\"\"+m, b=\"\"+s, c=\"\"+ms;\n";
-        closure +="\t\tif(a.length()!=2)\n";
-        closure +="\t\t\ta = \"0\" + a;\n";
-        closure +="\t\tif(b.length()!=2)\n";
-        closure +="\t\t\tb = \"0\" + b;\n";
-        closure +="\t\twhile(c.length()!=3)\n";
-        closure +="\t\t\tc = \"0\" + c;\n";
-        closure +="\t\tSystem.out.println(h + \":\" + a + \":\" + b + \".\" + c);\n";
-        closure +="\t}\n";
+        closure +="    public static void printTime(long ms){\n";
+        closure +="        long s=0, m=0, h=0;\n";
+        closure +="        if(ms>1000){\n";
+        closure +="            s = ms/1000;\n";
+        closure +="            if(s>60){\n";
+        closure +="                m = s/60;\n";
+        closure +="                if(m>60)\n";
+        closure +="                    h = m/60;\n";
+        closure +="            }\n";
+        closure +="        }\n";
+        closure +="        m%=60;\n";
+        closure +="        s%=60;\n";
+        closure +="        ms%=1000;\n";
+        closure +="        String a=\"\"+m, b=\"\"+s, c=\"\"+ms;\n";
+        closure +="        if(a.length()!=2)\n";
+        closure +="            a = \"0\" + a;\n";
+        closure +="        if(b.length()!=2)\n";
+        closure +="            b = \"0\" + b;\n";
+        closure +="        while(c.length()!=3)\n";
+        closure +="            c = \"0\" + c;\n";
+        closure +="        System.out.println(h + \":\" + a + \":\" + b + \".\" + c);\n";
+        closure +="    }\n";
         closure +="}\n";
         return closure;
     }
