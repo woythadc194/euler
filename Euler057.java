@@ -1,5 +1,5 @@
 import java.math.BigInteger;
-public class Euler57{
+public class Euler057{
 
     private static int counter = 0;
     

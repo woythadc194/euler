@@ -1,7 +1,7 @@
 //FIXME
 import java.util.*;
 import java.io.*;
-public class Euler81{
+public class Euler081{
 
     public static void main(String[] args) throws FileNotFoundException{
         int [][] matrix = makeMatrix();

@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 import java.math.*;
-public class Euler62{
+public class Euler062{
 
     private static Map<String, ArrayList<Long>> map 
                         = new HashMap<String, ArrayList<Long>>();

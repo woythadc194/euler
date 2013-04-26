@@ -1,5 +1,5 @@
 import java.math.BigInteger;
-public class Euler55{
+public class Euler055{
 
     public static void main(String[]args){
         int sum=0;

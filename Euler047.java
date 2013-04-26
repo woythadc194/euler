@@ -1,5 +1,5 @@
 import java.util.*;
-public class Euler47{
+public class Euler047{
     private static int scale=0;
 
     public static void main(String[] args){

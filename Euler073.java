@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 import java.math.*;
-public class Euler73{
+public class Euler073{
 
     private static Map<Double, String> map= new TreeMap<Double, String>();
 

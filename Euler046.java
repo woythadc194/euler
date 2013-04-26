@@ -1,4 +1,4 @@
-public class Euler46{
+public class Euler046{
     
     public static void main(String[] args){
         int i=1;

@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-public class Euler50{
+public class Euler050{
     
     private static int largePrime = 0;
     private static int max = 0;

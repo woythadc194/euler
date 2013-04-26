@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-public class Euler41{
+public class Euler041{
     
     public static void main(String [] args){
         for(long i=987654321L; i>0; i-=2)

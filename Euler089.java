@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-public class Euler89{
+public class Euler089{
     
     private static ArrayList<Integer> intList = new ArrayList<Integer>();
     private static ArrayList<String> romList = new ArrayList<String>();

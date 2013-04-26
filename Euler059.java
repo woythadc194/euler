@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 import java.math.*;
-public class Euler59{
+public class Euler059{
 
 	public static void main(String[] args) throws FileNotFoundException {
 

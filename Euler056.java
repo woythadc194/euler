@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 import java.math.*;
-public class Euler56{
+public class Euler056{
 
     private static int maxSum=0;
 	public static void main(String[] args){

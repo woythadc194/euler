@@ -1,5 +1,5 @@
 import java.util.*;
-public class Euler49{
+public class Euler049{
 
     public static void main(String[] args){
         for(int i=1234; i<=9876; i++){

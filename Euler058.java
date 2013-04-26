@@ -15,7 +15,7 @@ If one complete new layer is wrapped around the spiral above, a square spiral wi
 */
 
 import java.util.*;
-public class Euler58{
+public class Euler058{
 
     private static ArrayList<Integer> list = new ArrayList<Integer> ();
     
