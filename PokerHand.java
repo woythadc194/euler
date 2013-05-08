@@ -71,12 +71,13 @@ public class PokerHand{
             rank = 3;
         else if(onePair())
             rank = 2;
-        else
+        else{
             rank = 1;
-        int[] temp = new int[5];
-        for(int x=0; x<5; x++)
-            temp[x] = ary[0-x+4];
-        ary = temp;
+            int[] temp = new int[5];
+            for(int x=0; x<5; x++)
+                temp[x] = ary[0-x+4];
+            ary = temp;
+        }
         return rank;
     }
     
@@ -90,16 +91,27 @@ public class PokerHand{
     }
     
     private boolean straightFlush(){
+        int[] temp = new int[5];
+        for(int x=0; x<5; x++)
+            temp[x] = ary[0-x+4];
+        ary = temp;
         return (flush() && straight());
     }
     
     private boolean fourOfAKind(){
-        int [] temp = new int [14];
+        int [] cardOccur = new int [14];
         for(int i=0; i<5; i++)
-            temp[ary[i]-1]++;
-        for(int x : temp)
-            if(x==4)
+            cardOccur[ary[i]-1]++;
+        for(int x : cardOccur)
+            if(x==4){
+                for(int i=1; i<14; i++)
+                    if(cardOccur[i]==4)
+                        for(int j=0;j<4; j++)
+                            ary[j] = i;
+                    else if(temp[i]!=0)
+                        ary[4]=i;
                 return true;
+            }
         return false;
     }
     
