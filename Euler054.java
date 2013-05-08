@@ -3,8 +3,19 @@ import java.io.*;
 import java.math.*;
 public class Euler054{
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws FileNotFoundException{
         long start = System.currentTimeMillis();
+        Scanner sc = new Scanner(new File("poker.txt"));
+        while(sc.hasNext()){
+            String hand1 = "";
+            String hand2 = "";
+            for(int i=0; i<5; i++)
+                hand1 += sc.next() + " ";
+            for(int i=0; i<5; i++)
+                hand2 += sc.next() + " ";
+            System.out.println(Arrays.toString(new PokerHand(hand1).handStrength()));
+            System.out.println(Arrays.toString(new PokerHand(hand2).handStrength()));
+        }
         long end = System.currentTimeMillis();
         printTime(end-start);
     }
