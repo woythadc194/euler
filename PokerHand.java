@@ -96,6 +96,20 @@ public class PokerHand{
         return false;
     }
     
+    private boolean fullHouse(){
+        int [] temp = new int [14];
+        for(int i=0; i<5; i++)
+            temp[ary[i]-1]++;
+        boolean three = false;
+        boolean two = false;
+        for(int x : temp)
+            if(x==3)
+                three = true;
+            else if(x==2)
+                two = true;
+        return (three && two);
+    }
+    
     public String toString(){
         return this.hand;
     }
