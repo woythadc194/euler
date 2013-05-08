@@ -74,16 +74,7 @@ public class PokerHand{
     }
     
     private boolean straightFlush(){
-        if(!flush())
-            return false;
-        int card = ary[0];
-        for(int i=1; i<5; i++){
-            card2 = ary[i];
-            if(card2!=card+1)
-                return false;
-            card = card2;
-        }
-        return true;
+        return (flush() && straight());
     }
     
     private boolean fourOfAKind(){
@@ -118,6 +109,17 @@ public class PokerHand{
             String card = sc.next();
             if(card.charAt(card.length()-1) != suit)
                 return false;
+        }
+        return true;
+    }
+    
+    private boolean straight(){
+        int card = ary[0];
+        for(int i=1; i<5; i++){
+            card2 = ary[i];
+            if(card2!=card+1)
+                return false;
+            card = card2;
         }
         return true;
     }
