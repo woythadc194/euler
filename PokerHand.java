@@ -133,7 +133,21 @@ public class PokerHand{
                 return true;
         return false;
     }
-    
+ 
+    private boolean twoPair(){
+        int [] temp = new int [14];
+        for(int i=0; i<5; i++)
+            temp[ary[i]-1]++;
+        boolean a = false;
+        boolean b = false;
+        for(int x : temp)
+            if(x==2 && !a)
+                a = true;
+            else if(x==2)
+                b = true;
+        return (a && b);        
+    }   
+       
     public String toString(){
         return this.hand;
     }
