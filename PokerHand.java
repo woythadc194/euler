@@ -38,8 +38,16 @@ public class PokerHand{
         Collections.sort(temp);
         return temp;
     }
+
+    public int[] handStrength(){
+        int [] strength = new int [6];
+        strength[0] = rank();
+        for(int i=0; i<5 i++)
+            strength[i+1] = ary[i];
+        return strength;
+    }
     
-    public int rank(){
+    private int rank(){
         int rank = 0;
         if(royalFlush())
             rank = 1;
@@ -61,6 +69,7 @@ public class PokerHand{
             rank = 9;
         else
             rank = 10;
+        Arrays.sort(ary, Collections.reverseOrder());
         return rank;
     }
     
