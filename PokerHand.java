@@ -25,13 +25,15 @@ public class PokerHand{
             try{
                 x = Integer.parseInt("" + c);
             } catch(Exception e){
-                if(c=='J')
+                if(c=='T')
+                    x = 10;
+                else if(c=='J')
                     x = 11;
                 else if(c=='Q')
                     x = 12;
                 else if(c=='K')
                     x = 13;
-                else if(c=='A')
+                else //if(c=='A')
                     x = 14;
             }
             temp[counter] = x;
@@ -52,28 +54,28 @@ public class PokerHand{
     private int rank(){
         int rank = 0;
         if(royalFlush())
-            rank = 1;
-        else if(straightFlush())
-            rank = 2;
-        else if(fourOfAKind())
-            rank = 3;
-        else if(fullHouse())
-            rank = 4;
-        else if(flush())
-            rank = 5;
-        else if(straight())
-            rank = 6;
-        else if(threeOfAKind())
-            rank = 7;
-        else if(twoPair())
-            rank = 8;
-        else if(onePair())
-            rank = 9;
-        else
             rank = 10;
+        else if(straightFlush())
+            rank = 9;
+        else if(fourOfAKind())
+            rank = 8;
+        else if(fullHouse())
+            rank = 7;
+        else if(flush())
+            rank = 6;
+        else if(straight())
+            rank = 5;
+        else if(threeOfAKind())
+            rank = 4;
+        else if(twoPair())
+            rank = 3;
+        else if(onePair())
+            rank = 2;
+        else
+            rank = 1;
         int[] temp = new int[5];
         for(int x=0; x<5; x++)
-            temp[x] = ary[0-x+5];
+            temp[x] = ary[0-x+4];
         ary = temp;
         return rank;
     }

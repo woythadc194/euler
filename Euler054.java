@@ -13,7 +13,7 @@ public class Euler054{
                 hand1 += sc.next() + " ";
             for(int i=0; i<5; i++)
                 hand2 += sc.next() + " ";
-            System.out.println(Arrays.toString(new PokerHand(hand1).handStrength()));
+            System.out.print(Arrays.toString(new PokerHand(hand1).handStrength()) + "  ");
             System.out.println(Arrays.toString(new PokerHand(hand2).handStrength()));
         }
         long end = System.currentTimeMillis();
