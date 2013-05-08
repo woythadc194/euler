@@ -13,8 +13,19 @@ public class Euler054{
                 hand1 += sc.next() + " ";
             for(int i=0; i<5; i++)
                 hand2 += sc.next() + " ";
-            System.out.print(Arrays.toString(new PokerHand(hand1).handStrength()) + "  ");
-            System.out.println(Arrays.toString(new PokerHand(hand2).handStrength()));
+            int [] hand1S = new PokerHand(hand1).handStrength();
+            int [] hand2S = new PokerHand(hand2).handStrength();
+            System.out.print(Arrays.toString(hand1S) + "  ");
+            System.out.print(Arrays.toString(hand2S) + "  ");
+            for(int i=0; i<6; i++){
+                if(hand1S[i] > hand2S[i]){
+                    System.out.println(" Player 1");
+                    break;
+                } else if(hand1S[i] < hand2S[i]){
+                    System.out.println(" Player 2");
+                    break;
+                }
+            }
         }
         long end = System.currentTimeMillis();
         printTime(end-start);
