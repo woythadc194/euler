@@ -124,6 +124,16 @@ public class PokerHand{
         return true;
     }
     
+    private boolean threeOfAKind(){
+        int [] temp = new int [14];
+        for(int i=0; i<5; i++)
+            temp[ary[i]-1]++;
+        for(int x : temp)
+            if(x==3)
+                return true;
+        return false;
+    }
+    
     public String toString(){
         return this.hand;
     }
