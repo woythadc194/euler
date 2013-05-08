@@ -62,7 +62,7 @@ public class PokerHand{
         else if(fullHouse())
             rank = 7;
         else if(flush())
-            rank = 6;
+            rank = 6; 
         else if(straight())
             rank = 5;
         else if(threeOfAKind())
