@@ -1,6 +1,7 @@
 /*
  * Author: Dylan Woythal
  */
+ 
 import java.util.Scanner; 
 public class PokerHand{
 
@@ -14,7 +15,7 @@ public class PokerHand{
     
     private int [] getArray(){
         int [] temp = new int[5];
-        Scanner sc = new Scanner(hand);
+        Scanner sc = new Scanner(this.hand);
         int counter = 0;
         while(sc.hasNext()){
             int x = 0;
@@ -34,10 +35,11 @@ public class PokerHand{
             temp[counter] = x;
             counter++;
         }
+        Collections.sort(temp);
         return temp;
     }
     
-    public String rank(){
+    public int rank(){
         int rank = 0;
         if(royalFlush())
             rank = 1;
@@ -59,9 +61,34 @@ public class PokerHand{
             rank = 9;
         else
             rank = 10;
+        return rank;
     }
     
+    private boolean royalFlush(){
+        if(!flush())
+            return false;
+        for(int i=10; i<15; i++)
+            if(ary[i-10]!=i)
+                return false;
+        return true;
+    }
+    
+    private boolean straightFlush(){
+        if(!flush())
+            return false;
+        int card = ary[0];
+        for(int i=1; i<5; i++){
+            card2 = ary[i];
+            if(card2!=card+1)
+                return false;
+            card = card2;
+        }
+        return true;
+    }
+    
+    
+    
     public String toString(){
-        return hand;
+        return this.hand;
     }
 }
