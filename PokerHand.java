@@ -86,7 +86,15 @@ public class PokerHand{
         return true;
     }
     
-    
+    private boolean fourOfAKind(){
+        int [] temp = new int [14];
+        for(int i=0; i<5; i++)
+            temp[ary[i]-1]++;
+        for(int x : temp)
+            if(x==4)
+                return true;
+        return false;
+    }
     
     public String toString(){
         return this.hand;
