@@ -2,7 +2,9 @@
  * Author: Dylan Woythal
  */
  
-import java.util.Scanner; 
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.Arrays;
 public class PokerHand{
 
     private String hand;
@@ -35,14 +37,14 @@ public class PokerHand{
             temp[counter] = x;
             counter++;
         }
-        Collections.sort(temp);
+        Arrays.sort(temp);
         return temp;
     }
 
     public int[] handStrength(){
         int [] strength = new int [6];
         strength[0] = rank();
-        for(int i=0; i<5 i++)
+        for(int i=0; i<5; i++)
             strength[i+1] = ary[i];
         return strength;
     }
@@ -69,7 +71,10 @@ public class PokerHand{
             rank = 9;
         else
             rank = 10;
-        Arrays.sort(ary, Collections.reverseOrder());
+        int[] temp = new int[5];
+        for(int x=0; x<5; x++)
+            temp[x] = ary[0-x+5];
+        ary = temp;
         return rank;
     }
     
@@ -114,8 +119,8 @@ public class PokerHand{
         Scanner sc = new Scanner(this.hand);
         String card = sc.next();
         char suit = card.charAt(card.length()-1);
-        while(sc.hasNext){
-            String card = sc.next();
+        while(sc.hasNext()){
+            card = sc.next();
             if(card.charAt(card.length()-1) != suit)
                 return false;
         }
@@ -125,7 +130,7 @@ public class PokerHand{
     private boolean straight(){
         int card = ary[0];
         for(int i=1; i<5; i++){
-            card2 = ary[i];
+            int card2 = ary[i];
             if(card2!=card+1)
                 return false;
             card = card2;
