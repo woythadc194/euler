@@ -110,6 +110,18 @@ public class PokerHand{
         return (three && two);
     }
     
+    private boolean flush(){
+        Scanner sc = new Scanner(this.hand);
+        String card = sc.next();
+        char suit = card.charAt(card.length()-1);
+        while(sc.hasNext){
+            String card = sc.next();
+            if(card.charAt(card.length()-1) != suit)
+                return false;
+        }
+        return true;
+    }
+    
     public String toString(){
         return this.hand;
     }
