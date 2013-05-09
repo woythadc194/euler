@@ -7,18 +7,34 @@ import java.util.Collections;
 import java.util.Arrays;
 public class PokerHand{
 
-    private String hand;
-    private int [] ary;
+    private String s;
+    private int [] hand;       // size == 5
+    private int [] cardOccur; // size == 15
+    private int [] bestHand; // size == 6
     
-    public PokerHand(String hand){
-        this.hand = hand;
-        this.ary = getArray();
+    public PokerHand(String s){
+        this.s = s;
+        this.hand = getArray();
+        this.cardOccur = getOccur();
+        this.bestHand = getBestHand();
+    }
+    
+//////////////////////////////////
+///    constructor methods     ///
+//////////////////////////////////
+
+    
+    private int[] getOccur(){
+        int [] temp = new int [15];
+        for(int card=0; card<5; card++)
+            temp[hand[card]]++;
+        return temp;
     }
     
     private int [] getArray(){
         int [] temp = new int[5];
-        Scanner sc = new Scanner(this.hand);
-        int counter = 0;
+        Scanner sc = new Scanner(this.s);
+        int card = 0;
         while(sc.hasNext()){
             int x = 0;
             char c = sc.next().charAt(0);
@@ -36,101 +52,173 @@ public class PokerHand{
                 else //if(c=='A')
                     x = 14;
             }
-            temp[counter] = x;
-            counter++;
+            temp[card] = x;
+            card++;
         }
         Arrays.sort(temp);
         return temp;
     }
 
-    public int[] handStrength(){
-        int [] strength = new int [6];
-        strength[0] = rank();
+    private int[] getBestHand(){
+        int [] temp = new int [6];
+        temp[0] = rank();
         for(int i=0; i<5; i++)
-            strength[i+1] = ary[i];
-        return strength;
+            temp[i+1] = hand[i];
+        return temp;
     }
     
     private int rank(){
         int rank = 0;
-        if(royalFlush())
-            rank = 10;
-        else if(straightFlush())
-            rank = 9;
-        else if(fourOfAKind())
-            rank = 8;
-        else if(fullHouse())
-            rank = 7;
-        else if(flush())
-            rank = 6; 
-        else if(straight())
-            rank = 5;
-        else if(threeOfAKind())
-            rank = 4;
-        else if(twoPair())
-            rank = 3;
-        else if(onePair())
-            rank = 2;
-        else{
-            rank = 1;
-            int[] temp = new int[5];
-            for(int x=0; x<5; x++)
-                temp[x] = ary[0-x+4];
-            ary = temp;
+        if(royalFlush()){
+            rank = 10; highCard();
+        }else if(straightFlush()){
+            rank = 9; highCard();
+        }else if(fourOfAKind()){
+            rank = 8; get4Kind();
+        }else if(fullHouse()){
+            rank = 7; getFullHouse();
+        }else if(flush()){
+            rank = 6; highCard(); 
+        }else if(straight()){
+            rank = 5; highCard();
+        }else if(threeOfAKind()){
+            rank = 4; get3Kind();
+        }else if(twoPair()){
+            rank = 3; get2Pair();
+        }else if(onePair()){
+            rank = 2; get1Pair();
+        }else{
+            rank = 1; highCard();
         }
         return rank;
     }
+    
+    
+//////////////////////////////////
+///      sorting of cards      ///
+//////////////////////////////////
+
+    
+    private void highCard(){
+        int[] temp = new int[5];
+        for(int x=0; x<5; x++)
+            temp[x] = hand[0-x+4];
+        hand = temp;
+    }
+    
+    private void get4Kind(){
+        for(int index=0; index<14; index++){
+            if(cardOccur[index]==4)
+                for(int card=0; card<4; card++)
+                    hand[card] = index;
+            else if(cardOccur[index]!=0)
+                hand[4]=index;
+        }
+    }
+    
+    private void getFullHouse(){
+        for(int index=0; index<14; index++)
+            if(cardOccur[index]==3){
+                hand[0]=index; 
+                hand[1]=index; 
+                hand[2]=index;
+            } else if(cardOccur[index]==2){
+                hand[3]=index+1; 
+                hand[4]=index+1;
+            }
+    }
+    
+    private void get3Kind(){
+        hand[3]=0; hand[4]=0;
+        for(int index=14; index>0; index--){
+            if(cardOccur[index]==3){
+                hand[0]=index; 
+                hand[1]=index; 
+                hand[2]=index;
+            }else if(cardOccur[index]!=0)
+                if(hand[3]==0)
+                    hand[3]=index+1;
+                else
+                    hand[4]=index+1;
+        }
+    }
+    
+    private void get2Pair(){
+        int [] temp = new int[5];
+        for(int index=14; index>0; index--){
+            if(cardOccur[index]==2)
+                if(temp[0]==0){
+                    temp[0]=index;
+                    temp[1]=index;
+                }else{
+                    temp[2]=index;
+                    temp[3]=index;
+                }
+            else
+                temp[4]=index;
+        }
+        hand=temp;
+    }
+    
+    private void get1Pair(){
+        int [] temp = new int[5];
+        for(int index=14; index>0; index--){
+            if(cardOccur[index]==2){
+                temp[0]=index;
+                temp[1]=index;
+            }else if(cardOccur[index]==1){
+                if(temp[2]==0)
+                    temp[2]=index;
+                else if(temp[3]==0)
+                    temp[3]=index;
+                else
+                    temp[4]=index;
+            }
+        }
+        hand=temp;
+    }
+
+//////////////////////////////////
+///       Boolean tests        ///
+//////////////////////////////////
     
     private boolean royalFlush(){
         if(!flush())
             return false;
         for(int i=10; i<15; i++)
-            if(ary[i-10]!=i)
+            if(hand[i-10]!=i)
                 return false;
         return true;
     }
     
     private boolean straightFlush(){
-        int[] temp = new int[5];
-        for(int x=0; x<5; x++)
-            temp[x] = ary[0-x+4];
-        ary = temp;
-        return (flush() && straight());
+        return(flush() && straight());
     }
     
     private boolean fourOfAKind(){
-        int [] cardOccur = new int [14];
-        for(int i=0; i<5; i++)
-            cardOccur[ary[i]-1]++;
         for(int x : cardOccur)
             if(x==4){
-                for(int i=1; i<14; i++)
-                    if(cardOccur[i]==4)
-                        for(int j=0;j<4; j++)
-                            ary[j] = i;
-                    else if(temp[i]!=0)
-                        ary[4]=i;
                 return true;
             }
         return false;
     }
     
     private boolean fullHouse(){
-        int [] temp = new int [14];
+        int [] cardOccur = new int [14];
         for(int i=0; i<5; i++)
-            temp[ary[i]-1]++;
+            cardOccur[hand[i]-1]++;
         boolean three = false;
         boolean two = false;
-        for(int x : temp)
+        for(int x : cardOccur)
             if(x==3)
                 three = true;
             else if(x==2)
                 two = true;
-        return (three && two);
+        return (two && three);
     }
     
     private boolean flush(){
-        Scanner sc = new Scanner(this.hand);
+        Scanner sc = new Scanner(this.s);
         String card = sc.next();
         char suit = card.charAt(card.length()-1);
         while(sc.hasNext()){
@@ -142,9 +230,9 @@ public class PokerHand{
     }
     
     private boolean straight(){
-        int card = ary[0];
+        int card = hand[0];
         for(int i=1; i<5; i++){
-            int card2 = ary[i];
+            int card2 = hand[i];
             if(card2!=card+1)
                 return false;
             card = card2;
@@ -155,9 +243,9 @@ public class PokerHand{
     private boolean threeOfAKind(){
         int [] temp = new int [14];
         for(int i=0; i<5; i++)
-            temp[ary[i]-1]++;
-        for(int x : temp)
-            if(x==3)
+            temp[hand[i]-1]++;
+        for(int x=0; x<14; x++)
+            if(temp[x]==3)
                 return true;
         return false;
     }
@@ -165,7 +253,7 @@ public class PokerHand{
     private boolean twoPair(){
         int [] temp = new int [14];
         for(int i=0; i<5; i++)
-            temp[ary[i]-1]++;
+            temp[hand[i]-1]++;
         boolean a = false;
         boolean b = false;
         for(int x : temp)
@@ -179,14 +267,48 @@ public class PokerHand{
     private boolean onePair(){
         int [] temp = new int [14];
         for(int i=0; i<5; i++)
-            temp[ary[i]-1]++;
+            temp[hand[i]-1]++;
         for(int x : temp)
             if(x==2)
                 return true;
         return false;
     }   
+    
+//////////////////////////////////
+///       public returns       ///
+//////////////////////////////////
+    
+    
+    public int[] bestHand(){
+        return this.bestHand;
+    }
+    
+    public String bestHandString(){
+        int rank = bestHand[0];
+
+        if(rank == 10)
+            return "Royal Flush";
+        else if(rank == 9)
+            return "Straight Flush";
+        else if(rank == 8)
+            return "Four Of A Kind";
+        else if(rank == 7)
+            return "Full House";
+        else if(rank == 6)
+            return "Flush";
+        else if(rank == 5)
+            return "Straight";
+        else if(rank == 4)
+            return "Three Of A Kind";
+        else if(rank == 3)
+            return "Two Pair";
+        else if(rank == 2)
+            return "One Pair";
+        else
+            return "High Card";
+    }
        
     public String toString(){
-        return this.hand;
+        return Arrays.toString(this.hand);
     }
 }
