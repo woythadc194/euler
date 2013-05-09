@@ -6,27 +6,28 @@ public class Euler054{
     public static void main(String[] args) throws FileNotFoundException{
         long start = System.currentTimeMillis();
         Scanner sc = new Scanner(new File("poker.txt"));
+        int counter = 0;
         while(sc.hasNext()){
-            String hand1 = "";
-            String hand2 = "";
+            String handa = "";
+            String handb = "";
             for(int i=0; i<5; i++)
-                hand1 += sc.next() + " ";
+                handa += sc.next() + " ";
             for(int i=0; i<5; i++)
-                hand2 += sc.next() + " ";
-            int [] hand1S = new PokerHand(hand1).handStrength();
-            int [] hand2S = new PokerHand(hand2).handStrength();
-            System.out.print(Arrays.toString(hand1S) + "  ");
-            System.out.print(Arrays.toString(hand2S) + "  ");
+                handb += sc.next() + " ";
+            PokerHand hand1 = new PokerHand(handa);
+            PokerHand hand2 = new PokerHand(handb);
+            int [] hand1a = hand1.bestHand();
+            int [] hand2a = hand2.bestHand();
             for(int i=0; i<6; i++){
-                if(hand1S[i] > hand2S[i]){
-                    System.out.println(" Player 1");
+                if(hand1a[i] > hand2a[i]){
+                    counter++;
                     break;
-                } else if(hand1S[i] < hand2S[i]){
-                    System.out.println(" Player 2");
+                } else if(hand1a[i] < hand2a[i]){
                     break;
                 }
             }
         }
+        System.out.println(counter);
         long end = System.currentTimeMillis();
         printTime(end-start);
     }
