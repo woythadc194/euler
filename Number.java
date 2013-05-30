@@ -150,6 +150,14 @@ public class Number{
         return new Number(newNum);
     }
     
+    public Number mod(Number b){
+        if(b.toString() == "0"){
+            System.out.println("Error: Modulus by 0");
+            System.exit(0);
+        }
+        return (this.subtract(this.divide(b).multiply(b)));
+    }
+    
     public Number pow(int power){
         if(power == 1)
             return this;
@@ -220,7 +228,7 @@ public class Number{
     }
     
     public boolean even(){
-        return (this.array[0]%2);
+        return (this.array[0]%2 == 0);
     }
     
     public Number add1(){
