@@ -68,6 +68,12 @@ Also included:
             boolean equals(Number b)
                 true if this == b
                 false if this != b
+            boolean even()
+                true if this%2 == 0
+                false if this%2 == 1
+            boolean pandigital()
+                true if this is the same number if read forwards and backwards
+                false otherwise
             Number add1()
                 this + 1
             Number sub1()

@@ -8,6 +8,8 @@ public class TestNumber{
         BigInteger c = new BigInteger("112233445566778899");
         BigInteger d = new BigInteger("987654320");
         
+        Number e = new Number("1234567890987654321");
+        
 
         System.out.println("\nAdd: " + (a.add(b).toString().equals(c.add(d).toString()) ? "Works" : "FIXME"));
         System.out.println(a + " + " + b + " = " + a.add(b) + " : Number");
@@ -49,5 +51,11 @@ public class TestNumber{
         System.out.println("\t" + (a.even() ? "Yes" : "No") + " : Number");
         System.out.println("Is " + b + " even? ");
         System.out.println("\t" + (b.even() ? "Yes" : "No") + " : Number");
+        
+        System.out.println("\nPandigital:");
+        System.out.println("Is " + a + " pandigital? ");
+        System.out.println("\t" + (a.pandigital() ? "Yes" : "No") + " : Number");
+        System.out.println("Is " + e + " pandigital? ");
+        System.out.println("\t" + (e.pandigital() ? "Yes" : "No") + " : Number");
     }
 }

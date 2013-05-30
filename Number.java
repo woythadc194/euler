@@ -231,6 +231,12 @@ public class Number{
         return (this.array[0]%2 == 0);
     }
     
+    public boolean pandigital(){
+        String original = this.toString();
+        String flipped = flip(original);
+        return flipped.equals(original);
+    }
+    
     public Number add1(){
         return this.add(new Number("1"));
     }
