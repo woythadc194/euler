@@ -26,6 +26,10 @@ public class TestNumber{
         System.out.println("\nDivide: " + (a.divide(b).toString().equals(c.divide(d).toString()) ? "Works" : "FIXME"));
         System.out.println(a + " / " + b + " = " + a.divide(b) + " : Number");
         System.out.println(c + " / " + d + " = " + c.divide(d) + " : BigInteger");  
+        
+        System.out.println("\nMod: " + (a.mod(b).toString().equals(c.mod(d).toString()) ? "Works" : "FIXME"));
+        System.out.println(a + " % " + b + " = " + a.mod(b) + " : Number");
+        System.out.println(c + " % " + d + " = " + c.mod(d) + " : BigInteger");  
 
         System.out.println("\nPow: " + (a.pow(3).toString().equals(c.pow(3).toString()) ? "Works" : "FIXME"));
         System.out.println(a + " ^3 = " + a.pow(3) + " : Number");
