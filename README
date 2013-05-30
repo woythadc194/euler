@@ -52,7 +52,10 @@ Also included:
                 this * b
             Number divide(Number b)
                 this / b
-                Error is divide by 0
+                Error if divide by 0
+            Number mod(Number b)
+                this % b
+                Error if modulus by 0
             Number pow(int n)
                 this ^ n
                 Error if negative
