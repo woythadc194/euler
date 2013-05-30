@@ -18,24 +18,45 @@ public class BigNumber{
         this.array=a;
     }
     
-    public BigNumber divide(BigNumber b){
+    public BigNumber divide(BigNumber divisor){
         int thisSize = this.array.length;
-        int bSize = b.array.length;
-        int [] newNum = new int[thisSize];
-        BigNumber c = new BigNumber(newNum);
-        if(b.toString() == "0"){
+        BigNumber reverse = new BigNumber(this.flip(this.toString()));
+        String newNum = "";
+        if(divisor.toString() == "0"){
             System.out.println("Error: Divide by Zero");
             System.exit(0);
         }
-    //    if(this.isLessThan(b))
+        if(this.isLessThan(divisor))
             return new BigNumber("0");
-      /*  int diffInLength = thisSize - bSize;
+        BigNumber focus = new BigNumber("0");
         for(int i=0; i<thisSize; i++){
-            int counter = 0;
-            c.array[i] = this.array[i];
-            if(b.isLessThan(c))
+            focus = new BigNumber(focus.toString() + reverse.array[i]);
+            if(divisor.isGreaterThan(focus)){
+                newNum += "0";
+            } else if(divisor.equals(focus)){
+                newNum += "1";
+                focus = new BigNumber("0");
+            } else { //divisor < focus
+                int counter = 0;
+                BigNumber sum = new BigNumber("0");
+                while(sum.isLessThan(focus)){
+                    sum = sum.add(divisor);
+                    counter++;
+                }
+                counter--;                 //Reduced so now less than focus by 1
+                sum = sum.subtract(divisor);  //  ""  ""  ""  ""  ""  ""  ""
+                focus = focus.subtract(sum);
+                newNum += counter;
+            }
         }
-*/
+        return new BigNumber(newNum);
+    }
+    
+    private String flip(String s){
+        String t = "";
+        for(int i=s.length()-1; i>=0; i--)
+            t += s.charAt(i);
+        return t;
     }
         
     public BigNumber subtract(BigNumber b){
@@ -44,28 +65,25 @@ public class BigNumber{
         int [] thisCopy = new int [thisSize];
         for(int i=0; i<thisSize; i++)
             thisCopy[i]=this.array[i];
-        if((bSize>thisSize) || ((bSize==thisSize)&&this.isLessThan(b))){
+        if(this.isLessThan(b)){
             System.out.println("Error: Answer Negative");
             System.exit(0);
         }
         int [] newNum = new int[thisSize];
         for(int i=0; i<bSize; i++){
-            int x = thisCopy[i];
-            int y = b.array[i];
-            if(x<y){
-                int offset = 1;
-                x += 10;
-                while(thisCopy[i+offset] == 0){
-                    thisCopy[i+offset] = 9;
-                    offset++;
-                }
-                thisCopy[i+offset]--;
+            if(thisCopy[i]<0){
+                thisCopy[i]=9;
+                thisCopy[i+1]--;
             }
-            newNum[i] = x-y;
+            if(thisCopy[i]<b.array[i]){
+                thisCopy[i] += 10;
+                thisCopy[i+1]--;
+            }
+            newNum[i] = thisCopy[i]-b.array[i];
         }
         for(int i=bSize; i<thisSize; i++)
             newNum[i]=thisCopy[i];
-        return new BigNumber(newNum);
+        return new BigNumber(new BigNumber(newNum).toString());
     }
     
     public boolean isLessThan(BigNumber b){
@@ -138,7 +156,7 @@ public class BigNumber{
             }
         }
         newNum[newNum.length-1]=carryover;
-        return new BigNumber(newNum);
+        return new BigNumber(new BigNumber(newNum).toString());
     }
 
     public BigNumber multiply(BigNumber b){
@@ -182,7 +200,7 @@ public class BigNumber{
                 temp = new int[maxLength*2];
             }            
         }
-        return new BigNumber(newNum);
+        return new BigNumber(new BigNumber(newNum).toString());
     }
     
     public BigNumber pow(int power){
