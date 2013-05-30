@@ -162,7 +162,7 @@ public class Number{
         return pow(power, this, true);
     }
     
-    public Number pow(int power, Number b, boolean first){
+    private Number pow(int power, Number b, boolean first){
         if(first){
             first=false;
             if(power == 2)
