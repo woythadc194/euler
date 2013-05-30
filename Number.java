@@ -155,6 +155,10 @@ public class Number{
             return this;
         if(power == 0)
             return new Number("0");
+        if(power < 0){
+            System.out.println("Error: Can't accomidate negative powers yet");
+            System.exit(0);
+        }
         return pow(power, this, true);
     }
     
@@ -213,6 +217,10 @@ public class Number{
             if(b.array[i] != this.array[i])
                 return false;
         return true; //if numbers are equal
+    }
+    
+    public boolean even(){
+        return (this.array[0]%2);
     }
     
     public Number add1(){
