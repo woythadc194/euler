@@ -4,9 +4,9 @@ public class TestNumber{
 
     public static void main(String[] args){
         Number a = new Number("112233445566778899");
-        Number b = new Number("987654321");
+        Number b = new Number("987654320");
         BigInteger c = new BigInteger("112233445566778899");
-        BigInteger d = new BigInteger("987654321");
+        BigInteger d = new BigInteger("987654320");
         
 
         System.out.println("\nAdd: " + (a.add(b).toString().equals(c.add(d).toString()) ? "Works" : "FIXME"));
@@ -43,5 +43,11 @@ public class TestNumber{
         System.out.println("\nMajorTest...");
         System.out.println("BigInteger Result: " + c.pow(3).multiply(c.subtract(d)).add(c.divide(d)).divide(c).pow(2));
         System.out.println("Number Result:     " + a.pow(3).multiply(a.subtract(b)).add(a.divide(b)).divide(a).pow(2));
+        
+        System.out.println("\nEven:");
+        System.out.println("Is " + a + " even? ");
+        System.out.println("\t" + (a.even() ? "Yes" : "No") + " : Number");
+        System.out.println("Is " + b + " even? ");
+        System.out.println("\t" + (b.even() ? "Yes" : "No") + " : Number");
     }
 }
