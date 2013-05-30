@@ -1,3 +1,77 @@
-My personally hand-crafted solutions to problems on ProjectEuler.net
+My solutions to problems on ProjectEuler.net in Java
 Level 3 on ProjectEuler.net
-Hello testing changes
+
+Also included:
+    
+    MakeEuler - Dylan Woythal
+        Create file stub for Euler problems
+        Parameters:
+            Problem number
+                Tests to see if a file with this problem number as part of the 
+                filename already exists to prevent writing over previous work
+            index of methods
+                Adds needed methods off a list of methods contained in this file
+                
+    I2P - Dr. Timmothy Fossum
+        Infix to postfix engine 
+    
+    ParseException - Dr. Timmothy Fossum
+        Throws exceptions for the I2P generator
+    
+    PEvaluator - Dylan Woythal
+        Evaluates postfix expressions that include numbers extending past the 
+            range of Long
+        
+    PokerHand - Dylan Woythal
+        Takes a string of 5 cards and determines that hand's rank and sorts the 
+            cards in order for that specific hand.
+        Returns:
+            int [] bestHand()
+                size 6 with best hand as a value from 1-10 (1 being best) as the 
+                0 index followed by the sorted hand as the following 5 index's
+            String bestHandString()
+                The actual name for the best hand (ex. "Straight")
+            int [] hand()
+                size 5 representing the unsorted hand that player is dealt
+    
+    Number - Dylan Woythal
+        My version of the BigInteger class. The purpose of this class was to see
+            how I would go about writing the same class for C++ since there is 
+            no equivalent in C++.
+        Constructor:
+            Number(String s)
+                String of all digits.
+                No '.' || ' ' || 'NON-NUMERIC'
+        Returns:
+            Number add(Number b)
+                this + b
+            Number subtract(Number b)
+                this - b
+                Error if negative //FIXME
+            Number multiply(Number b)
+                this * b
+            Number divide(Number b)
+                this / b
+                Error is divide by 0
+            Number pow(int n)
+                this ^ n
+                Error if negative
+            boolean isGreaterThan(Number b)
+                true if this > b
+                false if this <= b
+            boolean isLessThan(Number b)
+                true if this < b
+                false if this >= b
+            boolean equals(Number b)
+                true if this == b
+                false if this != b
+            Number add1()
+                this + 1
+            Number sub1()
+                this - 1
+            String toString()
+                String representation of this Number
+    
+    TestNumber - Dylan Woythal
+        Tests results of computation using Number against BigInteger as well as 
+            other methods that BigInteger doesn't include
