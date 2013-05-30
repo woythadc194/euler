@@ -45,5 +45,9 @@ public class TestBigNumber{
             + ( (a.equals(a)==c.equals(c)) ? "Works" : "FIXME")); 
         System.out.println(a + " == " + a + " : BigNumber");
         System.out.println(c + " == " + c + " : BigInteger");
+        
+        System.out.println("\nMajorTest...");
+        System.out.println("BigInteger Result: " + c.pow(3).multiply(c.subtract(d)).add(c.divide(d)).divide(c).pow(3));
+        System.out.println("BigNumber Result:  " + a.pow(3).multiply(a.subtract(b)).add(a.divide(b)).divide(a).pow(3));
     }
 }
