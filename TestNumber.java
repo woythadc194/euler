@@ -37,6 +37,10 @@ public class TestNumber{
         System.out.println(a + " ^3 = " + a.pow(3) + " : Number");
         System.out.println(c + " ^3 = " + c.pow(3) + " : BigInteger");
 
+        System.out.println("\nSqrt: ");
+        Number x = new Number("81");
+        System.out.println("Sqrt(" + b + ") = " + b.sqrt() + " : Number");
+        System.out.println("Sqrt(" + x + ") = " + x.sqrt() + " : Number");
         
         System.out.println("\nEquals: " + ( (a.equals(a)==c.equals(c)) ? "Works" : "FIXME")); 
         System.out.println(a + " == " + a + " : Number");
