@@ -45,39 +45,56 @@ Also included:
         Returns:
             Number add(Number b)
                 this + b
+
             Number subtract(Number b)
                 this - b
                 Error if negative //FIXME
+
             Number multiply(Number b)
                 this * b
+
             Number divide(Number b)
                 this / b
                 Error if divide by 0
+
             Number mod(Number b)
                 this % b
                 Error if modulus by 0
+
             Number pow(int n)
                 this ^ n
                 Error if negative
+
+            Number sqrt()
+                if a perfect square, return that square
+                else the square is a double so round up to next whole number
+
             boolean isGreaterThan(Number b)
                 true if this > b
                 false if this <= b
+
             boolean isLessThan(Number b)
                 true if this < b
                 false if this >= b
+
             boolean equals(Number b)
                 true if this == b
                 false if this != b
+
             boolean even()
                 true if this%2 == 0
                 false if this%2 == 1
+
             boolean pandigital()
                 true if this is the same number if read forwards and backwards
                 false otherwise
+
             Number add1()
                 this + 1
+
             Number sub1()
                 this - 1
+
             String toString()
                 String representation of this Number
     
