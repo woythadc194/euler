@@ -38,7 +38,7 @@ public class TestNumber{
         System.out.println(c + " ^3 = " + c.pow(3) + " : BigInteger");
 
         System.out.println("\nSqrt: ");
-        Number x = new Number("81");
+        Number x = new Number("20800850625");
         System.out.println("Sqrt(" + b + ") = " + b.sqrt() + " : Number");
         System.out.println("Sqrt(" + x + ") = " + x.sqrt() + " : Number");
         
