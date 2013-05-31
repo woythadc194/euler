@@ -181,6 +181,20 @@ public class Number{
             return b;
         return pow(power-1, b.multiply(this), first);
     }
+    
+    public Number sqrt(){
+        return this.sqrt(Number.divide(new BigNumber("2")), new Number("0"));
+    }
+    //FIXME
+    private Number sqrt(Number high, Number low){
+        if(high.multiply(high).equals(this))
+            return high;
+        if(low.multiply(low).equals(this))
+            return low;
+        if(high.sub1().equals(low))
+            return low;
+        if(high.multiply(high).isGreaterThan(this)
+    }
 
     public boolean isGreaterThan(Number b){
         int thisSize = this.array.length;
