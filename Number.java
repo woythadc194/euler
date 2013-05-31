@@ -119,6 +119,11 @@ public class Number{
     public Number divide(Number divisor){
         int thisSize = this.array.length;
         Number reverse = new Number(this.flip(this.toString()));
+        int reverseSize = reverse.array.length;
+        boolean leadingZero = (thisSize != reverseSize);
+        if(leadingZero){
+            reverse.array = addLeadingZero(reverse);
+        }
         String newNum = "";
         if(divisor.toString() == "0"){
             System.out.println("Error: Divide by Zero");
@@ -137,15 +142,23 @@ public class Number{
             } else { //divisor < focus
                 int counter = 0;
                 Number sum = new Number("0");
-                while(sum.isLessThan(focus)){
+                while(sum.isLessThan(focus) || sum.equals(focus)){
                     sum = sum.add(divisor);
                     counter++;
                 }
+//                System.out.println("Number:    " + Arrays.toString(this.array));
+//                System.out.println("Reverse:   " + Arrays.toString(reverse.array));
+//                System.out.println("Focus:     " + focus);
+//                System.out.println("Divisor:   " + divisor);
                 counter--;                 //Reduced so now less than focus by 1
                 sum = sum.subtract(divisor);  //  ""  ""  ""  ""  ""  ""  ""
+//                System.out.println("Counter:   " + counter);
                 focus = focus.subtract(sum);
+//                System.out.println("Remainder: " + focus);
                 newNum += counter;
             }
+//            System.out.println("Ans sofar: " + newNum);
+//            System.out.println();
         }
         return new Number(newNum);
     }
@@ -183,7 +196,7 @@ public class Number{
     }
     
     public Number sqrt(){
-        return this.sqrt(Number.divide(new BigNumber("2")), new Number("0"));
+        return sqrt(this.divide(new Number("2")), new Number("0"));
     }
     //FIXME
     private Number sqrt(Number high, Number low){
@@ -193,7 +206,10 @@ public class Number{
             return low;
         if(high.sub1().equals(low))
             return low;
-        if(high.multiply(high).isGreaterThan(this)
+        if(high.multiply(high).isGreaterThan(this))
+            return sqrt(high.add(low).divide(new Number("2")), low);
+        //high^2 < this
+        return sqrt(high, low.add(high).divide(new Number("2")) );
     }
 
     public boolean isGreaterThan(Number b){
@@ -242,7 +258,9 @@ public class Number{
     }
     
     public boolean even(){
-        return (this.array[0]%2 == 0);
+    
+        return (this.mod(new Number("2")).toString() == "0");
+//        return (this.array[0]%2 == 0);
     }
     
     public boolean pandigital(){
@@ -264,6 +282,13 @@ public class Number{
         for(int i=s.length()-1; i>=0; i--)
             t += s.charAt(i);
         return t;
+    }
+    
+    private int [] addLeadingZero(Number b){
+        int [] x = new int [b.array.length + 1];
+        for(int i=0; i<b.array.length; i++)
+            x[i] = b.array[i];
+        return x;
     }
     
     public String toString(){
