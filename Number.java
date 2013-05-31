@@ -122,7 +122,7 @@ public class Number{
         int reverseSize = reverse.array.length;
         boolean leadingZero = (thisSize != reverseSize);
         if(leadingZero){
-            reverse.array = addLeadingZero(reverse);
+            reverse.array = addLeadingZero(reverse, thisSize-reverseSize);
         }
         String newNum = "";
         if(divisor.toString() == "0"){
@@ -183,33 +183,40 @@ public class Number{
         return pow(power, this, true);
     }
     
-    private Number pow(int power, Number b, boolean first){
-        if(first){
-            first=false;
-            if(power == 2)
-                return b.multiply(this);
-            return pow(power-2, b.multiply(this), first);
+    //Paramaters: int power - int to raise Number by
+    //            Number b - number being altered * this
+    //            boolean first - the first time going through the helper or not
+    //                to decide whether or not to take 2 or 1 away from power
+    //Returns:  Number ^ power
+    private Number pow(int power, Number b, boolean first){                      
+        if(first){                                                              //First time through the method
+            first=false;                                                        //makes sure we wont come back to this block if method called again
+            if(power == 2)                                                      //if power was only 2 (squared)
+                return b.multiply(this);                                        //return value*value 
+            return pow(power-2, b.multiply(this), first);                       //else take 2 away from power then call method again
         }
-        if(power == 0)
+        if(power == 0)                                                          //if power has been reduced to 0, return b
             return b;
-        return pow(power-1, b.multiply(this), first);
+        return pow(power-1, b.multiply(this), first);                           //else power is greater than 0, take 1 away and call method again
     }
     
     public Number sqrt(){
-        return sqrt(this.divide(new Number("2")), new Number("0"));
+        return sqrt(this, this.divide(new Number("2")), new Number("0"));       //helper method using a high and low limit with an average
     }
-    //FIXME
-    private Number sqrt(Number high, Number low){
-        if(high.multiply(high).equals(this))
+
+    private Number sqrt(Number high, Number med, Number low){
+        if(high.multiply(high).equals(this))                                    //perfect square found
             return high;
-        if(low.multiply(low).equals(this))
+        if(low.multiply(low).equals(this))                                      //perfect square found
             return low;
-        if(high.sub1().equals(low))
-            return low;
-        if(high.multiply(high).isGreaterThan(this))
-            return sqrt(high.add(low).divide(new Number("2")), low);
-        //high^2 < this
-        return sqrt(high, low.add(high).divide(new Number("2")) );
+        if(med.multiply(med).equals(this))                                      //perfect square found        
+            return med;
+        if(high.sub1().equals(low))                                             //Not a perfect square, rounding up to next whole number (high)
+            return high;
+        if(med.multiply(med).isGreaterThan(this))                               //med too great
+            return sqrt(med, med.add(low).divide(new Number("2")), low);        //high gets med, low stays same, med is average of high and low
+                                                                                //med too little
+        return sqrt(high, med.add(high).divide(new Number("2")), med);          //high stays same, low get med, med is average of high and low
     }
 
     public boolean isGreaterThan(Number b){
@@ -284,8 +291,8 @@ public class Number{
         return t;
     }
     
-    private int [] addLeadingZero(Number b){
-        int [] x = new int [b.array.length + 1];
+    private int [] addLeadingZero(Number b, int numZeros){
+        int [] x = new int [b.array.length + numZeros];
         for(int i=0; i<b.array.length; i++)
             x[i] = b.array[i];
         return x;
